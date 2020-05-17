@@ -13,6 +13,7 @@
 		6E11D6212471B328008A579E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E11D61F2471B328008A579E /* Main.storyboard */; };
 		6E11D6232471B32A008A579E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E11D6222471B32A008A579E /* Assets.xcassets */; };
 		6E11D6322471B4CD008A579E /* ShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E11D6312471B4CD008A579E /* ShadowView.swift */; };
+		6E11D6342471B89D008A579E /* UserNotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E11D6332471B89D008A579E /* UserNotificationService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		6E11D6222471B32A008A579E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6E11D6272471B32A008A579E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6E11D6312471B4CD008A579E /* ShadowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowView.swift; sourceTree = "<group>"; };
+		6E11D6332471B89D008A579E /* UserNotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +70,7 @@
 		6E11D62D2471B345008A579E /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				6E11D6332471B89D008A579E /* UserNotificationService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -75,8 +78,8 @@
 		6E11D62E2471B34C008A579E /* View */ = {
 			isa = PBXGroup;
 			children = (
-				6E11D61F2471B328008A579E /* Main.storyboard */,
 				6E11D6222471B32A008A579E /* Assets.xcassets */,
+				6E11D61F2471B328008A579E /* Main.storyboard */,
 				6E11D6312471B4CD008A579E /* ShadowView.swift */,
 			);
 			path = View;
@@ -169,6 +172,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6E11D6342471B89D008A579E /* UserNotificationService.swift in Sources */,
 				6E11D6322471B4CD008A579E /* ShadowView.swift in Sources */,
 				6E11D61E2471B328008A579E /* MainViewController.swift in Sources */,
 				6E11D61A2471B328008A579E /* AppDelegate.swift in Sources */,

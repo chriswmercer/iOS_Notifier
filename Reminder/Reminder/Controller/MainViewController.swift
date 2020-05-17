@@ -12,7 +12,7 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        UserNotificationService.instance.authorise()
     }
 
     @IBAction func dateButtonPressed(_ sender: Any) {
