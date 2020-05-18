@@ -55,7 +55,9 @@ class UserNotificationService: NSObject, UNUserNotificationCenterDelegate {
         if (approved) {
             let content = UNMutableNotificationContent()
             content.title = "Timer Finished"
-            content.body = "Your timer has finished"
+            content.body = "Your timer for \(Int(interval)) seconds has finished"
+            content.sound = .default
+            content.badge = 1
             
             let trigger = UNTimeIntervalNotificationTrigger(timeInterval: interval, repeats: false)
             let request = UNNotificationRequest(identifier: "userNotification.timer", content: content, trigger: trigger)
@@ -64,11 +66,29 @@ class UserNotificationService: NSObject, UNUserNotificationCenterDelegate {
                     print("Error \(String(describing: error?.localizedDescription))")
                 }
             }
+        } else {
+            authorise()
         }
     }
     
-    func dateRequest(with components: DateComponents) {
-        
+    func dateRequest(with components: DateComponents, text: String = "No Message") {
+        if (approved) {
+            let content = UNMutableNotificationContent()
+            content.title = "Date Notification"
+            content.body = "Your date notification has been triggered with message: \(text)"
+            content.sound = .default
+            content.badge = 1
+            
+            let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: true)
+            let request = UNNotificationRequest(identifier: "userNotification.date", content: content, trigger: trigger)
+            uncenter.add(request) { (error) in
+                if(error != nil) {
+                    print("Error \(String(describing: error?.localizedDescription))")
+                }
+            }
+        } else {
+            authorise()
+        }
     }
     
     func locationRequest() {

@@ -16,15 +16,31 @@ class MainViewController: UIViewController {
     }
 
     @IBAction func dateButtonPressed(_ sender: Any) {
+        let actions: [Action] = [ Action(title: "Every minute at second 1", data: 1)]
         
+        AlertService.actionSheet(in: self, actions: actions) {data in
+            var components = DateComponents()
+            components.second = data
+            UserNotificationService.instance.dateRequest(with: components, text: "Every minute")
+        }
     }
     
     @IBAction func timerButtonPressed(_ sender: Any) {
-        UserNotificationService.instance.timerRequest(with: 5)
+        let actions: [Action] = [ Action(title: "5 seconds", data: 5),
+                                  Action(title: "30 seconds", data: 30),
+                                  Action(title: "1 minute", data: 60)]
+        
+        AlertService.actionSheet(in: self, actions: actions) { data in
+            UserNotificationService.instance.timerRequest(with: Double(data))
+        }
     }
     
     @IBAction func loctionButtonPressed(_ sender: Any) {
+        let actions: [Action] = [ Action(title: "When I return", data: 1)]
         
+        AlertService.actionSheet(in: self, actions: actions) { data in
+            //
+        }
     }
 }
 
