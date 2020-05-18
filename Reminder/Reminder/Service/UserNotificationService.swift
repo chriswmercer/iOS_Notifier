@@ -38,6 +38,7 @@ class UserNotificationService: NSObject, UNUserNotificationCenterDelegate {
     
     func configure() {
         uncenter.delegate = self
+        setupActionsAndCategories()
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
@@ -51,6 +52,35 @@ class UserNotificationService: NSObject, UNUserNotificationCenterDelegate {
         completionHandler(options)
     }
     
+    func getAttachment(for type: AlertType) -> UNNotificationAttachment? {
+        var imageName: String
+        switch type {
+        case .Timer: imageName = "TimeAlert"
+        case .Date: imageName = "DateAlert"
+        case .Location: imageName = "LocationAlert"
+        }
+        
+        guard let url = Bundle.main.url(forResource: imageName, withExtension: "png") else { return nil }
+        do {
+            let attachment = try UNNotificationAttachment(identifier: type.rawValue, url: url)
+            return attachment
+        } catch {
+            return nil
+        }
+    }
+    
+    func setupActionsAndCategories() {
+        let timerAction = UNNotificationAction(identifier: AlertType.Timer.rawValue, title: "Run timer logic", options: [.authenticationRequired])
+        let dateAction = UNNotificationAction(identifier: AlertType.Date.rawValue, title: "Run date logic", options: [.destructive])
+        let locAction = UNNotificationAction(identifier: AlertType.Location.rawValue, title: "Run location logic", options: [.foreground])
+        
+        let timerCategoy = UNNotificationCategory(identifier: AlertType.Timer.rawValue, actions: [timerAction], intentIdentifiers: [], options: [])
+        let dateCategoy = UNNotificationCategory(identifier: AlertType.Date.rawValue, actions: [dateAction], intentIdentifiers: [], options: [])
+        let locCategory = UNNotificationCategory(identifier: AlertType.Location.rawValue, actions: [locAction], intentIdentifiers: [], options: [])
+        
+        uncenter.setNotificationCategories([timerCategoy, dateCategoy, locCategory])
+    }
+    
     func timerRequest(with interval: TimeInterval) {
         if (approved) {
             let content = UNMutableNotificationContent()
@@ -58,6 +88,8 @@ class UserNotificationService: NSObject, UNUserNotificationCenterDelegate {
             content.body = "Your timer for \(Int(interval)) seconds has finished"
             content.sound = .default
             content.badge = 1
+            if let attachment = getAttachment(for: .Timer) { content.attachments.append(attachment) }
+            content.categoryIdentifier = AlertType.Timer.rawValue
             
             let trigger = UNTimeIntervalNotificationTrigger(timeInterval: interval, repeats: false)
             let request = UNNotificationRequest(identifier: "userNotification.timer", content: content, trigger: trigger)
@@ -78,6 +110,8 @@ class UserNotificationService: NSObject, UNUserNotificationCenterDelegate {
             content.body = "Your date notification has been triggered with message: \(text)"
             content.sound = .default
             content.badge = 1
+            if let attachment = getAttachment(for: .Date) { content.attachments.append(attachment) }
+            content.categoryIdentifier = AlertType.Date.rawValue
             
             let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: true)
             let request = UNNotificationRequest(identifier: "userNotification.date", content: content, trigger: trigger)
@@ -98,6 +132,8 @@ class UserNotificationService: NSObject, UNUserNotificationCenterDelegate {
             content.body = "You have returned"
             content.sound = .default
             content.badge = 1
+            if let attachment = getAttachment(for: .Location) { content.attachments.append(attachment) }
+            content.categoryIdentifier = AlertType.Location.rawValue
 
             let request = UNNotificationRequest(identifier: "userNotification.loc", content: content, trigger: nil)
             uncenter.add(request) { (error) in
@@ -109,4 +145,10 @@ class UserNotificationService: NSObject, UNUserNotificationCenterDelegate {
             authorise()
         }
     }
+}
+
+enum AlertType: String {
+    case Timer = "timer"
+    case Date = "date"
+    case Location = "location"
 }

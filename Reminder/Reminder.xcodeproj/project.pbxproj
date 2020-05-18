@@ -16,6 +16,9 @@
 		6E11D6342471B89D008A579E /* UserNotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E11D6332471B89D008A579E /* UserNotificationService.swift */; };
 		6EE1F947247295E300E4FCE2 /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE1F946247295E300E4FCE2 /* AlertService.swift */; };
 		6EE1F9492472AAE000E4FCE2 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE1F9482472AAE000E4FCE2 /* LocationService.swift */; };
+		6EE1F94E2472B7E700E4FCE2 /* DateAlert.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EE1F94D2472B7E700E4FCE2 /* DateAlert.png */; };
+		6EE1F9502472B7F500E4FCE2 /* LocationAlert.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EE1F94F2472B7F500E4FCE2 /* LocationAlert.png */; };
+		6EE1F9522472B80200E4FCE2 /* TimeAlert.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EE1F9512472B80200E4FCE2 /* TimeAlert.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +33,9 @@
 		6E11D6332471B89D008A579E /* UserNotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationService.swift; sourceTree = "<group>"; };
 		6EE1F946247295E300E4FCE2 /* AlertService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertService.swift; sourceTree = "<group>"; };
 		6EE1F9482472AAE000E4FCE2 /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
+		6EE1F94D2472B7E700E4FCE2 /* DateAlert.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DateAlert.png; sourceTree = "<group>"; };
+		6EE1F94F2472B7F500E4FCE2 /* LocationAlert.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LocationAlert.png; sourceTree = "<group>"; };
+		6EE1F9512472B80200E4FCE2 /* TimeAlert.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TimeAlert.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +90,7 @@
 		6E11D62E2471B34C008A579E /* View */ = {
 			isa = PBXGroup;
 			children = (
+				6EE1F94C2472B7C500E4FCE2 /* Attachments */,
 				6E11D6222471B32A008A579E /* Assets.xcassets */,
 				6E11D61F2471B328008A579E /* Main.storyboard */,
 				6E11D6312471B4CD008A579E /* ShadowView.swift */,
@@ -106,6 +113,16 @@
 				6E11D61D2471B328008A579E /* MainViewController.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		6EE1F94C2472B7C500E4FCE2 /* Attachments */ = {
+			isa = PBXGroup;
+			children = (
+				6EE1F94D2472B7E700E4FCE2 /* DateAlert.png */,
+				6EE1F94F2472B7F500E4FCE2 /* LocationAlert.png */,
+				6EE1F9512472B80200E4FCE2 /* TimeAlert.png */,
+			);
+			path = Attachments;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -167,6 +184,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				6E11D6232471B32A008A579E /* Assets.xcassets in Resources */,
+				6EE1F9502472B7F500E4FCE2 /* LocationAlert.png in Resources */,
+				6EE1F9522472B80200E4FCE2 /* TimeAlert.png in Resources */,
+				6EE1F94E2472B7E700E4FCE2 /* DateAlert.png in Resources */,
 				6E11D6212471B328008A579E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
