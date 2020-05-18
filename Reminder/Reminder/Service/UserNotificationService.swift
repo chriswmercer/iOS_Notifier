@@ -15,6 +15,7 @@ class UserNotificationService: NSObject, UNUserNotificationCenterDelegate {
     static let instance = UserNotificationService()
     
     let uncenter = UNUserNotificationCenter.current()
+    var approved = false
     
     func authorise() {
         let options: UNAuthorizationOptions = [.alert, .badge, .sound]
@@ -25,10 +26,12 @@ class UserNotificationService: NSObject, UNUserNotificationCenterDelegate {
             }
             
             guard granted else {
-                print("user denide access")
+                print("user denied access")
+                self.approved = false
                 return
             }
-            
+
+            self.approved = true
             self.configure()
         }
     }
@@ -46,5 +49,29 @@ class UserNotificationService: NSObject, UNUserNotificationCenterDelegate {
         
         let options: UNNotificationPresentationOptions = [.alert, .sound]
         completionHandler(options)
+    }
+    
+    func timerRequest(with interval: TimeInterval) {
+        if (approved) {
+            let content = UNMutableNotificationContent()
+            content.title = "Timer Finished"
+            content.body = "Your timer has finished"
+            
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: interval, repeats: false)
+            let request = UNNotificationRequest(identifier: "userNotification.timer", content: content, trigger: trigger)
+            uncenter.add(request) { (error) in
+                if(error != nil) {
+                    print("Error \(String(describing: error?.localizedDescription))")
+                }
+            }
+        }
+    }
+    
+    func dateRequest(with components: DateComponents) {
+        
+    }
+    
+    func locationRequest() {
+        
     }
 }

@@ -20,7 +20,7 @@ class MainViewController: UIViewController {
     }
     
     @IBAction func timerButtonPressed(_ sender: Any) {
-        
+        UserNotificationService.instance.timerRequest(with: 5)
     }
     
     @IBAction func loctionButtonPressed(_ sender: Any) {
