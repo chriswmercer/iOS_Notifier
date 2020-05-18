@@ -13,8 +13,15 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         UserNotificationService.instance.authorise()
+        LocationService.instance.authorise()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(regionEntered), name: NSNotification.Name("region.entered"), object: nil)
     }
-
+    
+    @objc func regionEntered() {
+        UserNotificationService.instance.locationRequest()
+    }
+    
     @IBAction func dateButtonPressed(_ sender: Any) {
         let actions: [Action] = [ Action(title: "Every minute at second 1", data: 1)]
         
@@ -39,7 +46,7 @@ class MainViewController: UIViewController {
         let actions: [Action] = [ Action(title: "When I return", data: 1)]
         
         AlertService.actionSheet(in: self, actions: actions) { data in
-            //
+            LocationService.instance.updateLocation()
         }
     }
 }

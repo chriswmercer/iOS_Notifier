@@ -92,6 +92,21 @@ class UserNotificationService: NSObject, UNUserNotificationCenterDelegate {
     }
     
     func locationRequest() {
-        
+        if (approved) {
+            let content = UNMutableNotificationContent()
+            content.title = "Location Notification"
+            content.body = "You have returned"
+            content.sound = .default
+            content.badge = 1
+
+            let request = UNNotificationRequest(identifier: "userNotification.loc", content: content, trigger: nil)
+            uncenter.add(request) { (error) in
+                if(error != nil) {
+                    print("Error \(String(describing: error?.localizedDescription))")
+                }
+            }
+        } else {
+            authorise()
+        }
     }
 }
