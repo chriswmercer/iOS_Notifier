@@ -16,6 +16,17 @@ class MainViewController: UIViewController {
         LocationService.instance.authorise()
         
         NotificationCenter.default.addObserver(self, selector: #selector(regionEntered), name: NSNotification.Name("region.entered"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleAction), name: NSNotification.Name("handlAction"), object: nil)
+        
+    }
+    
+    @objc func handleAction(_ sender: Notification) {
+        guard let action = sender.object as? AlertType else { return }
+        switch action {
+        case .Timer: print("Timer logic was fired")
+        case .Date: print("Date logic was fired")
+        case .Location: print ("Location logic was fired")
+        }
     }
     
     @objc func regionEntered() {

@@ -42,7 +42,9 @@ class UserNotificationService: NSObject, UNUserNotificationCenterDelegate {
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        
+        if let action = AlertType(rawValue: response.actionIdentifier) {
+            NotificationCenter.default.post(name: NSNotification.Name("handlAction"), object: action)
+        }
         completionHandler()
     }
     
